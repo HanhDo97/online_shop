@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_svg/flutter_svg.dart';
 import "package:online_shop/core/constants/constants.dart";
 import "package:online_shop/models/product.dart";
+import "package:online_shop/screens/detail/detail_body_screen.dart";
 
 class DetailScreen extends StatelessWidget {
   final Product product;
@@ -11,28 +12,33 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: product.color,
-      appBar: AppBar(
-        backgroundColor: product.color,
-        elevation: 0,
-        leading: IconButton(
-          icon: SvgPicture.asset(
-            'assets/icons/back.svg',
-            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-          ),
-          onPressed: () => Navigator.pop(context),
+      appBar: buildAppBar(context),
+      body: DetailBody(product: product,),
+    );
+  }
+
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: product.color,
+      elevation: 0,
+      leading: IconButton(
+        icon: SvgPicture.asset(
+          'assets/icons/back.svg',
+          colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
         ),
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: SvgPicture.asset('assets/icons/search.svg')),
-          IconButton(
-              onPressed: () {},
-              icon: SvgPicture.asset('assets/icons/cart.svg')),
-          const SizedBox(
-            width: kDefaultPaddin / 2,
-          )
-        ],
+        onPressed: () => Navigator.pop(context),
       ),
+      actions: [
+        IconButton(
+            onPressed: () {},
+            icon: SvgPicture.asset('assets/icons/search.svg')),
+        IconButton(
+            onPressed: () {},
+            icon: SvgPicture.asset('assets/icons/cart.svg')),
+        const SizedBox(
+          width: kDefaultPaddin / 2,
+        )
+      ],
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/components/color_and_size.dart';
+import 'package:online_shop/components/description.dart';
 import 'package:online_shop/components/product_title_image.dart';
 import 'package:online_shop/core/constants/constants.dart';
 import 'package:online_shop/models/product.dart';
@@ -34,7 +35,13 @@ class DetailBody extends StatelessWidget {
                             topLeft: Radius.circular(24),
                             topRight: Radius.circular(24)),
                       ),
-                      child: ColorAndSize(product: product),
+                      child: Column(
+                        children: [
+                          ColorAndSize(product: product),
+                          Description(product: product),
+                          CartCouter(),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -43,6 +50,49 @@ class DetailBody extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class CartCouter extends StatefulWidget {
+  const CartCouter({super.key});
+
+  @override
+  State<CartCouter> createState() => _CartCouterState();
+}
+
+class _CartCouterState extends State<CartCouter> {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        buildOutlineButton(),
+        Padding(
+          padding: const EdgeInsets.all(kDefaultPaddin / 4),
+          child: Text(
+            "01",
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 20
+            ),
+          ),
+        ),
+        buildOutlineButton(),
+      ],
+    );
+  }
+
+  ConstrainedBox buildOutlineButton() {
+    return ConstrainedBox(
+      constraints: BoxConstraints.tightFor(width: 32),
+      child: OutlinedButton(
+        onPressed: () {},
+        child: Icon(Icons.remove),
+        style: OutlinedButton.styleFrom(
+            padding: EdgeInsets.zero,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(13))),
       ),
     );
   }
